@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台词记忆助手（本地）</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>台词记忆助手</h1>
+    <p class="hint">像排练聊天一样自动走词：他人台词自动推进，轮到你时暂停作答。</p>
+
+    <section id="setupPanel" class="panel">
+      <h2>开始设置</h2>
+      <div class="grid">
+        <label>
+          你的角色
+          <select id="characterSelect"></select>
+        </label>
+
+        <label>
+          开始页
+          <input id="startPageInput" type="number" min="1" max="89" value="3" />
+        </label>
+
+        <label>
+          结束页
+          <input id="endPageInput" type="number" min="1" max="89" value="19" />
+        </label>
+
+        <label>
+          提示模式
+          <select id="modeSelect">
+            <option value="text">文本模式（只显示文字）</option>
+            <option value="audio">音频模式（文字 + 朗读）</option>
+          </select>
+        </label>
+
+        <label>
+          语义匹配强度
+          <select id="strictnessSelect">
+            <option value="loose">宽松</option>
+            <option value="standard" selected>标准</option>
+            <option value="strict">严格</option>
+          </select>
+        </label>
+      </div>
+      <button id="startBtn" class="primary">开始训练</button>
+      <p class="hint">说明：轮到你的角色时，可输入或语音回答；若点“我不会”，会先显示标准台词，再请你复述一遍。</p>
+    </section>
+
+    <section id="sessionPanel" class="panel hidden">
+      <div class="row">
+        <h2 id="sessionTitle">训练中</h2>
+        <button id="restartBtn">重新选择</button>
+      </div>
+
+      <div class="progress">
+        <span id="progressText"></span>
+      </div>
+
+      <div id="chatFeed" class="chatFeed"></div>
+
+      <section id="myTurnControls" class="controls hidden">
+        <label class="full">
+          输入你的台词
+          <textarea id="answerInput" rows="4" placeholder="可输入，或点“语音输入”"></textarea>
+        </label>
+        <div class="row">
+          <button id="micBtn" type="button">语音输入</button>
+          <button id="submitBtn" class="primary">检查答案</button>
+          <button id="dontKnowBtn" type="button">我不会</button>
+          <button id="continueBtn" class="hidden">继续</button>
+        </div>
+        <div id="feedback" class="feedback"></div>
+        <div id="actualLineBox" class="actual hidden"></div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
+
